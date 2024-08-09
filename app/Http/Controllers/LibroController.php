@@ -12,8 +12,13 @@ class LibroController extends Controller
      */
     public function index()
     {
-        # view('carpeta.carpeta.archivo')
-        return view('libro.index');
+        $libros['libros'] = libro::paginate(10);
+        // $libros = libro::paginate(10);
+        // return view('libro.index', [ 'data' => libro::all()  ]);
+
+
+        // return view('libro.index', [ 'libros' => $libros ]);
+        return view('libro.index', $libros);
     }
 
     /**
@@ -29,7 +34,27 @@ class LibroController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // $request->validate();
+        $data = $request->all();
+        // dd($request->file('imagen')->guessExtension());
+        // dd($request->file('imagen')->getClientOriginalName());
+        // dd($request->file('imagen'));
+
+        if($request->hasFile('imagen')){
+
+                $data['imagen'] = $request->file('imagen')->store('uploads', 'public');
+        }
+
+        libro::create($data);
+
+
+        # mostrar en JSON (Navegador o en POSTMAN)
+        // return response()->json($data);
+
+        return redirect()->route('libro.index');
+
+
+
     }
 
     /**
