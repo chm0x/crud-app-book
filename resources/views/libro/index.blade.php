@@ -16,7 +16,13 @@
                     <td>{{ $libro->titulo }}</td>
                     <td>{{ $libro->url }}</td>
                     <td>{{ $libro->imagen }}</td>
-                    <td>botones</td>
+                    <td>
+                        <form action="{{ route('libro.destroy', $libro) }}" method="POST">
+                            @csrf
+                            @method('DELETE')
+                            <input type="submit" value="Eliminar libro" class="btn btn-danger" />
+                        </form>
+                    </td>
                 </tr>
             @empty
                 <p>No hay nada que mostrar! </p>

@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\libro;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
+
+use App\Models\libro;
 
 class LibroController extends Controller
 {
@@ -86,6 +88,13 @@ class LibroController extends Controller
      */
     public function destroy(libro $libro)
     {
-        //
+        // THE VERY BASICS
+        // $libro = libro::findOrFail($id);
+
+        // THE BETTER, DOESNT NEED TO FIND WITH ID. 
+        Storage::delete('public/'.$libro->imagen);
+        $libro->delete();
+
+        return redirect()->route('libro.index');
     }
 }
