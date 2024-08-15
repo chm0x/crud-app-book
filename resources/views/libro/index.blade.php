@@ -15,8 +15,12 @@
                     <td>{{ $libro->id }}</td>
                     <td>{{ $libro->titulo }}</td>
                     <td>{{ $libro->url }}</td>
-                    <td>{{ $libro->imagen }}</td>
                     <td>
+                        <img src="{{ asset('storage').'/'.$libro->imagen }}" alt="{{ $libro->titulo }}" width="50" />
+                    </td>
+                    <td>
+                        <a href="{{ route('libro.edit', $libro) }}">Editar</a>
+                        |
                         <form action="{{ route('libro.destroy', $libro) }}" method="POST">
                             @csrf
                             @method('DELETE')

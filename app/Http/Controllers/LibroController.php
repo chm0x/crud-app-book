@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\LibroRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
@@ -43,7 +44,6 @@ class LibroController extends Controller
         // dd($request->file('imagen'));
 
         if($request->hasFile('imagen')){
-
                 $data['imagen'] = $request->file('imagen')->store('uploads', 'public');
         }
 
@@ -72,15 +72,22 @@ class LibroController extends Controller
      */
     public function edit(libro $libro)
     {
-        //
+        return view('libro.edit', [ 'libro' => $libro ]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, libro $libro)
+    public function update(LibroRequest $request, libro $libro)
     {
-        //
+        print_r($request->all());
+        $data = $request->all();
+
+        if($request->hasFile('imagen')){
+            $data['imagen'] = $request->file('imagen')->store('uploads', 'public');
+        }
+        $libro->update($data);
+        return redirect()->route('libro.index');
     }
 
     /**

@@ -1,4 +1,9 @@
-<form method="POST" action="{{ route('libro.update') }}" enctype="multipart/form-data">
+<form 
+    method="POST" 
+    action="{{ route('libro.update', $libro) }}" 
+    enctype="multipart/form-data"
+>
     @csrf
-    @include('libro.form',['heeela' => 'hola Mundo'])
+    @method('PATCH')
+    @include('libro.form', $libro)
 </form>
