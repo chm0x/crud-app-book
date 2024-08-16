@@ -53,7 +53,8 @@ class LibroController extends Controller
         # mostrar en JSON (Navegador o en POSTMAN)
         // return response()->json($data);
 
-        return redirect()->route('libro.index');
+        return redirect()->route('libro.index')
+                ->with("mensaje", "Libro agregado con éxito!!");
 
 
 
@@ -89,7 +90,8 @@ class LibroController extends Controller
         }
         $libro->update($data);
         
-        return redirect()->route('libro.index');
+        return redirect()->route('libro.index')
+                ->with("mensaje", "Libro actualizado con éxito!!");
     }
 
     /**
@@ -104,6 +106,7 @@ class LibroController extends Controller
         Storage::delete('public/'.$libro->imagen);
         $libro->delete();
 
-        return redirect()->route('libro.index');
+        return redirect()->route('libro.index')
+                ->with('mensaje', 'Libro eliminado con éxito!!!');
     }
 }

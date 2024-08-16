@@ -1,4 +1,9 @@
-    <a href="{{ route('libro.create') }}">Crear nuevo libro</a>
+{{-- VARIABLES DE SESSION --}}
+@if(Session::has('mensaje'))
+    {{ Session::get('mensaje') }}
+@endif
+{{-- FIN VARIABLES DE SESSION --}}
+<a href="{{ route('libro.create') }}">Crear nuevo libro</a>
     <div class="table-responsive">
     <table class="table table-primary">
         <thead>

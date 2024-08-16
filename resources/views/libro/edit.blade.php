@@ -7,3 +7,4 @@
     @method('PATCH')
     @include('libro.form', $libro)
 </form>
+<a href="{{ route('libro.index') }}">Regresar</a>
