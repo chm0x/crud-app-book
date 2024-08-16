@@ -80,13 +80,15 @@ class LibroController extends Controller
      */
     public function update(LibroRequest $request, libro $libro)
     {
-        print_r($request->all());
+        // print_r($request->all());
         $data = $request->all();
 
         if($request->hasFile('imagen')){
+            Storage::delete('public/'.$libro->imagen);
             $data['imagen'] = $request->file('imagen')->store('uploads', 'public');
         }
         $libro->update($data);
+        
         return redirect()->route('libro.index');
     }
 

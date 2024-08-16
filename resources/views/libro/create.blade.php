@@ -6,3 +6,4 @@
     @csrf
     @include('libro.form')
 </form>
+{{-- <a href="{{ url()->previous() }}">Regresar</a> --}}

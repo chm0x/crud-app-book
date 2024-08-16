@@ -13,3 +13,4 @@
 <br/>
 <br/>
 <input type="submit" value="Enviar" />
+<a href="{{ route('libro.index') }}">Regresar</a>

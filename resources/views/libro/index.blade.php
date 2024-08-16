@@ -1,4 +1,5 @@
-<div class="table-responsive">
+    <a href="{{ route('libro.create') }}">Crear nuevo libro</a>
+    <div class="table-responsive">
     <table class="table table-primary">
         <thead>
             <tr>
