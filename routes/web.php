@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\LibroController;
+use App\Http\Controllers\HomeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,12 +16,34 @@ use App\Http\Controllers\LibroController;
 |
 */
 
-Route::get('/', function () {
-    return redirect()->route('libro.index');
+Route::get('/', function(){
+    return view('welcome');
+    // return view('auth.login');
 });
+// Route::get('/', function () {
+//     return redirect()->route('libro.index');
+// });
 // Route::get('/', function(){
 //     return view('libros.index');
 // })->name('libros.index');
 // Route::get( '/libro',[LibroController::class, 'index'] )->name('libros.index');
 
-Route::resource('libro', LibroController::class);
+// Auth::
+
+
+Route::resource('libro', LibroController::class)
+    ->except(['show'])
+    ->middleware('auth');
+
+
+# No mostramos el registro ni el reset de password. 
+Auth::routes(['register' => false, 'reset' => false]);
+
+
+# Restringir los accesos.
+Route::group(['middleware' => 'auth'], function(){
+    Route::get('/home', [HomeController::class, 'index'])->name('home');
+
+    // Route::resource('libro', LibroController::class);
+
+} );
