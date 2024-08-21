@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\LibroController;
@@ -17,8 +18,11 @@ use App\Http\Controllers\HomeController;
 */
 
 Route::get('/', function(){
-    return view('welcome');
-    // return view('auth.login');
+    // return view('welcome');
+    if(Auth::check()){
+        return redirect()->route('libro.index');
+    }
+    return view('auth.login');
 });
 // Route::get('/', function () {
 //     return redirect()->route('libro.index');
