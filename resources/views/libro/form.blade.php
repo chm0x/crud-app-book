@@ -1,3 +1,4 @@
+{{-- INPUT FOR TITLE --}}
 <div class="mb-3">
     <label for="titulo" class="form-label">Titulo:</label>
     <input
@@ -7,10 +8,11 @@
         id="titulo"
         aria-describedby="helpId"
         placeholder="Pon el nombre del libro..."
-        value="{{ isset($libro->titulo) ? $libro->titulo : ''  }}"
+        value="{{ isset($libro->titulo) ? $libro->titulo : old('titulo')  }}"
     />
 </div>
 
+{{-- INPUT FOR URL --}}
 <div class="mb-3">
     <label for="url" class="form-label">URL</label>
     <input
@@ -20,11 +22,11 @@
         id="url"
         aria-describedby="helpId"
         placeholder="Inserta la URL..."
-        value="{{ isset($libro->url) ? $libro->url : '' }}"
+        value="{{ isset($libro->url) ? $libro->url : old('url') }}"
     />
 </div>
 
-
+{{-- INPUT FOR IMAGE --}}
 <div class="mb-3">
     <label for="imagen" class="form-label">Imagen</label>
     @if(isset($libro->imagen))
@@ -43,7 +45,7 @@
 </div>
 
 
-
+{{-- SUBMIT BUTTON --}}
 <input  type="submit" 
         value="{{ Route::is('libro.edit') ? 'Actualizar' : 'Crear un nuevo libro' }}" 
         class="btn btn-success" 

@@ -37,7 +37,23 @@ class LibroController extends Controller
      */
     public function store(Request $request)
     {
-        // $request->validate();
+        // $request->validate([
+        //     'titulo' => 'required | string | max:255',
+        //     'url' => 'required | string | max:255',
+        //     'imagen' => 'required | max:10000 | mimes:jpeg,png,jpg',
+        // ]);
+        $validate_fields = [
+            'titulo' => 'required | string | max:255',
+            'url' => 'required | string | max:255',
+            'imagen' => 'required | max:10000 | mimes:jpeg,png,jpg',
+        ];
+        $messages_form = [
+            "required" => 'El campo :attribute es requerido',
+            "imagen.mimes" => 'La imagen debe ser jpeg, png o jpg'
+        ];
+        $this->validate($request, $validate_fields, $messages_form);
+
+        
         $data = $request->all();
         // dd($request->file('imagen')->guessExtension());
         // dd($request->file('imagen')->getClientOriginalName());
@@ -79,8 +95,25 @@ class LibroController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(LibroRequest $request, libro $libro)
+    public function update(Request $request, libro $libro)
     {
+        $validate_fields = [
+            'titulo' => 'required | string | max:255',
+            'url' => 'required | string | max:255',
+        ];
+        $messages_form = [
+            "required" => 'El campo :attribute es requerido',
+        ];
+
+        if( $request->hasFile('imagen') )
+        {
+            $validate_fields['imagen'] = 'required | max:10000 | mimes:jpeg,png,jpg'; 
+            $messages_form['imagen.mimes'] = 'La imagen debe ser jpeg, png o jpg';
+        }
+
+
+
+        $this->validate($request, $validate_fields, $messages_form);
         // print_r($request->all());
         $data = $request->all();
 
