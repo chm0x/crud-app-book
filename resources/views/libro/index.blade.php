@@ -14,7 +14,6 @@
                     data-bs-dismiss="alert"
                     aria-label="Close"
                 ></button>
-            
                 <strong>Mensaje: </strong>{{ Session::get('mensaje') }}
             </div>
         @endif
@@ -64,7 +63,9 @@
                 </div>
 
             </div>
-            <div class="card-footer text-muted">Libros</div>
+            <div class="card-footer text-muted ">
+                {{ $libros->links() }}
+            </div>
         </div>
 
 
